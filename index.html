@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ena's Personal Website</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --purple: #9b4dca;
+            --blue: #4169E1;
+            --mustard: #FFDB58;
+        }
+
+        header.jumbotron,
+        nav.navbar,
+        section.container-fluid {
+            color: #fff;
+        }
+
+        header.jumbotron {
+            background-color: var(--purple);
+        }
+
+        nav.navbar {
+            background-color: var(--blue);
+        }
+
+        section.container-fluid {
+            background-color: var(--mustard);
+        }
+
+        section.container-fluid h2 {
+            color: var(--blue);
+        }
+
+        form#contact-form input.btn-success {
+            background-color: var(--blue);
+            border-color: var(--blue);
+        }
+
+        footer.text-center {
+            background-color: var(--blue);
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        footer.text-center p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Ena's Website</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#hobbies">My Hobbies</a></li>
+                    <li><a href="#contact">Contact Me</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header id="home" class="jumbotron"></header>
+    <section id="about" class="container-fluid"></section>
+    <section id="hobbies" class="container-fluid"></section>
+    <section id="contact" class="container-fluid"></section>
+    <footer class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>&copy; 2023 Ena's Website. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        var websiteContent = {
+            header: {
+                title: "Hi, I'm Ena!",
+                subtitle: "I'm a happy, compassionate, and loving person.",
+                buttonText: "Contact Me",
+                imagePath: "profile.jpg"
+            },
+            about: {
+                heading: "About Me",
+                paragraph: "Hi, I'm Ena and I love to spread happiness and positivity wherever I go. Whether I'm spending time with my family and friends, volunteering in my community, or exploring new places, I always strive to be kind and compassionate to others. Want to learn more about me? Feel free to contact me!",
+                contactLink: "#contact"
+            },
+            hobbies: {
+                heading: "My Hobbies",
+                hobbiesList: [
+                    {
+                        imagePath: "travel.jpg",
+                        heading: "Traveling",
+                        paragraph: "I love traveling to new places and experiencing different cultures."
+                    },
+                    {
+                        imagePath: "reading.jpg",
+                        heading: "Reading",
+                        paragraph: "I enjoy reading books on a variety of topics, from fiction to non-fiction."
+                    },
+                    {
+                        imagePath: "outdoors.jpg",
+                        heading: "Spending Time Outdoors",
+                        paragraph: "I love exploring nature and spending time outdoors, whether it's hiking, camping, or just taking a walk in the park."
+                    },
+                    {
+                        imagePath: "food.jpg",
+                        heading: "Trying New Foods",
+                        paragraph: "I enjoy trying new foods and exploring different cuisines."
+                    }
+                ]
+            },
+            contact: {
+                heading: "Contact Me",
+                paragraph: "Want to get in touch? Feel free to send me a message using the form below.",
+                formAction: "contact.php",
+                formFields: [
+                    {
+                        label: "Name *",
+                        name: "name",
+                        type: "text",
+                        placeholder: "Please enter your name *",
+                        required: true,
+                        errorMessage: "Name is required."
+                    },
+                    {
+                        label: "Email *",
+                        name: "email",
+                        type: "email",
+                        placeholder: "Please enter your email *",
+                        required: true,
+                        errorMessage: "Valid email is required."
+                    },
+                    {
+                        label: "Message *",
+                        name: "message",
+                        type: "textarea",
+                        placeholder: "Please enter your message *",
+                        required: true,
+                        errorMessage: "Message is required."
+                    }
+                ]
+            }
+        };
+
+        function createHeader(title, subtitle, buttonText, imagePath) {
+            return `
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>${title}</h1>
+          <p class="lead">${subtitle}</p>
+          <a href="#contact" class="btn btn-lg btn-primary">${buttonText}</a>
+        </div>
+        <div class="col-md-6">
+          <img src="${imagePath}" class="img-responsive" alt="Ena's Profile Picture">
+        </div>
+      </div>
+    </div>
+  `;
+        }
+
+        function createAbout(heading, paragraph, contactLink) {
+            return `
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2>${heading}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <p>${paragraph}</p>
+        <p>Want to learn more about me? Feel free to <a href="${contactLink}">contact me</a>!</p>
+      </div>
+    </div>
+  `;
+        }
+
+        function createHobbies(heading, hobbiesList) {
+            var hobbiesHtml = "";
+            hobbiesList.forEach(function (hobby) {
+                hobbiesHtml += `
+      <div class="col-md-3 col-sm-6">
+        <div class="thumbnail">
+          <img src="${hobby.imagePath}" alt="${hobby.heading}">
+          <div class="caption">
+<h3>${hobby.heading}</h3>
+<p>${hobby.paragraph}</p>
+</div>
+</div>
+</div>
+; }); return <div class="row">
+<div class="col-md-12 text-center">
+<h2>${heading}</h2>
+</div>
+</div>
+<div class="row">
+${hobbiesHtml}
+</div>
+`;
+            })
+        }
+
+        function createContact(heading, paragraph, formAction, formFields) {
+            var formHtml = "";
+            formFields.forEach(function (field) {
+                var inputHtml = "";
+                if (field.type === "textarea") {
+                    inputHtml = `<textarea id="form_${field.name}" name="${field.name}" class="form-control" placeholder="${field.placeholder}" rows="4" required="${field.required}" data-error="${field.errorMessage}"></textarea>`;
+                } else {
+                    inputHtml = `<input id="form_${field.name}" type="${field.type}" name="${field.name}" class="form-control" placeholder="${field.placeholder}" required="${field.required}" data-error="${field.errorMessage}">`;
+                }
+                formHtml += `
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="form_${field.name}">${field.label}</label>
+            ${inputHtml}
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+      </div>
+    `;
+            });
+            return `
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <h2>${heading}</h2>
+        <p>${paragraph}</p>
+        <form id="contact-form" method="post" action="${formAction}" role="form">
+          <div class="messages"></div>
+          <div class="controls">
+            ${formHtml}
+            <div class="row">
+              <div class="col-md-12">
+                <input type="submit" class="btn btn-success btn-send" value="Send message">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+        }
+
+        // Generate HTML code using the functions and JSON data
+        $("header.jumbotron").html(createHeader(websiteContent.header.title, websiteContent.header.subtitle, websiteContent.header.buttonText, websiteContent.header.imagePath));
+        $("section#about.container-fluid").html(createAbout(websiteContent.about.heading, websiteContent.about.paragraph, websiteContent.about.contactLink));
+        $("section#hobbies.container-fluid").html(createHobbies(websiteContent.hobbies.heading, websiteContent.hobbies.hobbiesList));
+        $("section#contact.container-fluid").html(createContact(websiteContent.contact.heading, websiteContent.contact.paragraph, websiteContent.contact.formAction, websiteContent.contact.formFields));
+    </script>
+</body>
+
+</html>
